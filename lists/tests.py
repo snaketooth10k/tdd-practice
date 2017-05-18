@@ -17,6 +17,16 @@ class HomePageTest(TestCase):
         self.assertEqual(new_item.text, 'A new list item')
 
 
+    def test_displays_all_list_items(self):
+        Item.objects.create(text='item 1')
+        Item.objects.create(text='item 2')
+
+        response = self.client.get('/')
+
+        self.assertIn('item 1', response.content.decode())
+        self.assertIn('item 2', response.content.decode())
+
+
     def test_redirects_after_post(self):
         response = self.client.post('/',
                                     data={'item_text': 'A new list item'})
