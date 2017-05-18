@@ -8,4 +8,5 @@ def home_page(request):
         return redirect('/')
 
 
-    return render(request, 'home.html')
+    return render(request, 'home.html', {'items': Item.objects.all()})
+
